@@ -2,6 +2,7 @@ $lt-gray: #ddd;
 $background-dark: #512DA8;
 $background-light: #9575CD;
 $background-pale: #D1C4E9;
+$background-moredark:#9575CD;
 
 @mixin zero-margin($pad-up-down, $pad-left-right) {
     margin: 0px auto;
@@ -19,3 +20,7 @@ $background-pale: #D1C4E9;
 .btn-linkedin{color:#fff!important;background-color:#007bb6!important;}
 .btn-twitter{color:#fff!important;background-color:#55acee!important;}
 .btn-mail{color:#fff!important;background-color:#512DA8!important;}
+
+.active{
+    background-color: $background-moredark;
+}

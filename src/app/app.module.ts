@@ -42,7 +42,8 @@ import { PromotionService } from './services/promotion.service';
     MatButtonModule,
     AppRoutingModule
   ],
-  providers: [ DishService,PromotionService ],
+  providers: [ DishService,
+    PromotionService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
