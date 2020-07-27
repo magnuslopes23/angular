@@ -33,8 +33,12 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div [hidden] ='dish'>
+  <div [hidden] ='dish || dishErrMess'>
     <mat-spinner></mat-spinner> <h4>loading . .please wait</h4>
+  </div>
+  <div fxFlex *ngIf='dishErrMess'>
+    <h2>Error</h2>
+    <h4>{{dishErrMess}}</h4>
   </div>
 
   <div fxFlex="40" fxLayout="column" *ngIf='dish'>
