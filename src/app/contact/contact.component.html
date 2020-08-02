@@ -35,9 +35,9 @@
       </div>
     </div>
   </div>
-  <div fxFlex fxFlexOffset='20px' class="form-size">
+  <div fxFlex fxFlexOffset='20px' [hidden]='isLoading' class="form-size">
     <h3>Send us Your Feedback </h3>
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="feedbackForm" *ngIf='!isLoding' #fform="ngForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -75,8 +75,63 @@
           <textarea matInput formControlName='message' placeholder="your Feedback" rows="12"></textarea>
         </mat-form-field>
       </p>
-      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]='feedbackForm.invalid'>submit</button>
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]='feedbackForm.invalid' (click)='onSubmit()'>submit</button>
     </form>
-
+  </div>
+  <mat-card *ngIf="isLoading && !isShowingResponse"
+              style="display: flex; justify-content: center; align-items: center"
+              @expand>
+      <mat-progress-spinner
+        color="primary"
+        mode="indeterminate">
+      </mat-progress-spinner>
+    </mat-card>
+    <mat-card *ngIf="isShowingResponse"
+              style="display: flex;"
+              @expand>
+      <mat-card-header>
+        <mat-card-title>Your Submission</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table>
+          <tr>
+          </tr>
+          <tr>
+            <td><span>First Name:</span></td>
+            <td>{{feedback.firstname}}</td>
+          </tr>
+          <tr>
+            <td><span>Last Name:</span></td>
+            <td>{{feedback.lastname}}</td>
+          </tr>
+          <tr>
+            <td><span>Tel. Number:</span></td>
+            <td>{{feedback.telnum}}</td>
+          </tr>
+          <tr>
+            <td><span>Email:</span></td>
+            <td>{{feedback.email}}</td>
+          </tr>
+          <tr>
+            <td><span>Contact You:</span></td>
+            <td>{{feedback.agree}}</td>
+          </tr>
+          <tr>
+            <td><span>How:</span></td>
+            <td>{{feedback.contacttype}}</td>
+          </tr>
+          <tr>
+            <td><span>Feedback:</span></td>
+            <td>{{feedback.message}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  <div [hidden] ='feedback || errMess' *ngIf='isLoading'>
+    <mat-spinner></mat-spinner> <h4>submitting</h4>
+  </div>
+  <div fxFlex *ngIf='errMess'>
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
   </div>
 </div>
